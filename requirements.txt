@@ -5,3 +5,4 @@ Faker==37.12.0
 Pillow>=10.3.0
 sqlparse==0.5.3
 tzdata==2025.2
+gunicorn
