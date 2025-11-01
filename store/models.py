@@ -91,6 +91,11 @@ class Order(models.Model):
         ('completed', 'Đã giao'),
         ('cancelled', 'Hủy'),
     ]
+    
+    PAYMENT_METHOD_CHOICES = [
+        ('cod', 'Thanh toán khi nhận hàng'),
+        ('bank', 'Chuyển khoản ngân hàng'),
+    ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders', verbose_name='Người dùng')
     full_name = models.CharField(max_length=100, verbose_name='Họ và tên')
@@ -98,6 +103,7 @@ class Order(models.Model):
     phone = models.CharField(max_length=20, verbose_name='Số điện thoại')
     address = models.TextField(verbose_name='Địa chỉ')
     total_price = models.DecimalField(max_digits=10, decimal_places=0, verbose_name='Tổng tiền')
+    payment_method = models.CharField(max_length=50, choices=PAYMENT_METHOD_CHOICES, default='cod', verbose_name='Phương thức thanh toán')
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name='Trạng thái')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Ngày tạo')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Ngày cập nhật')

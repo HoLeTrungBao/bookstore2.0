@@ -1,6 +1,7 @@
 {% extends 'store/base.html' %}
+{% load humanize %}
 
-{% block title %}Đặt hàng thành công - Cửa hàng sách{% endblock %}
+{% block title %}Đặt hàng thành công - Tiệm sách Urahara{% endblock %}
 
 {% block content %}
 <div class="text-center py-5">
@@ -15,7 +16,13 @@
             <h5 class="card-title">Thông tin đơn hàng</h5>
             <p><strong>Mã đơn hàng:</strong> #{{ order.id }}</p>
             <p><strong>Ngày đặt:</strong> {{ order.created_at|date:"d/m/Y H:i" }}</p>
-            <p><strong>Tổng tiền:</strong> <span class="text-danger fw-bold">{{ order.total_price|floatformat:0 }} đ</span></p>
+            <p><strong>Tổng tiền:</strong> <span class="text-danger fw-bold">{{ order.total_price|floatformat:0|intcomma }} đ</span></p>
+            <p><strong>Phương thức thanh toán:</strong> 
+                <span class="badge bg-info">
+                    <i class="bi bi-{% if order.payment_method == 'cod' %}truck{% else %}bank{% endif %}"></i> 
+                    {{ order.get_payment_method_display }}
+                </span>
+            </p>
             <p><strong>Trạng thái:</strong> <span class="badge bg-warning">{{ order.get_status_display }}</span></p>
         </div>
     </div>

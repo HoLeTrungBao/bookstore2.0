@@ -1,7 +1,12 @@
 {% extends 'store/base.html' %}
+{% load static %}
 {% load humanize %}
 
-{% block title %}{{ book.title }} - Cửa hàng sách{% endblock %}
+{% block title %}{{ book.title }} - Tiệm sách Urahara{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'store/css/rating.css' %}">
+{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -100,9 +105,18 @@
                         <h5 class="card-title">Viết đánh giá của bạn</h5>
                         <form method="post">
                             {% csrf_token %}
-                            <div class="mb-3">
-                                <label for="{{ form.rating.id_for_label }}" class="form-label">{{ form.rating.label }}</label>
-                                {{ form.rating }}
+                            <div class="rating-container">
+                                <label class="rating-label">Đánh giá (chọn số sao)</label>
+                                <div class="rating-stars">
+                                    {% for choice in form.rating.field.choices %}
+                                        <input type="radio" name="rating" value="{{ choice.0 }}" id="rating{{ choice.0 }}" class="radio-input" required>
+                                        <label for="rating{{ choice.0 }}" class="radio-label">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path class="star-fill" d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#FFD700" stroke-width="2" stroke-linejoin="round"/>
+                                            </svg>
+                                        </label>
+                                    {% endfor %}
+                                </div>
                                 {% if form.rating.errors %}
                                     <div class="text-danger">{{ form.rating.errors }}</div>
                                 {% endif %}

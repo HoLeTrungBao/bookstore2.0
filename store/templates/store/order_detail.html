@@ -1,6 +1,7 @@
 {% extends 'store/base.html' %}
+{% load humanize %}
 
-{% block title %}Chi tiết đơn hàng #{{ order.id }} - Cửa hàng sách{% endblock %}
+{% block title %}Chi tiết đơn hàng #{{ order.id }} - Tiệm sách Urahara{% endblock %}
 
 {% block content %}
 <h2 class="mb-4"><i class="bi bi-receipt"></i> Chi tiết đơn hàng #{{ order.id }}</h2>
@@ -32,15 +33,15 @@
                                     <small class="text-muted">Tác giả: {{ item.book.author }}</small>
                                 </td>
                                 <td>{{ item.quantity }}</td>
-                                <td>{{ item.price|floatformat:0 }} đ</td>
-                                <td class="fw-bold">{{ item.get_total_price|floatformat:0 }} đ</td>
+                                <td>{{ item.price|floatformat:0|intcomma }} đ</td>
+                                <td class="fw-bold">{{ item.get_total_price|floatformat:0|intcomma }} đ</td>
                             </tr>
                         {% endfor %}
                     </tbody>
                     <tfoot>
                         <tr>
                             <td colspan="3" class="text-end"><strong>Tổng tiền:</strong></td>
-                            <td class="fw-bold text-danger fs-5">{{ order.total_price|floatformat:0 }} đ</td>
+                            <td class="fw-bold text-danger fs-5">{{ order.total_price|floatformat:0|intcomma }} đ</td>
                         </tr>
                     </tfoot>
                 </table>
@@ -61,6 +62,17 @@
                         <span class="badge bg-success">{{ order.get_status_display }}</span>
                     {% elif order.status == 'cancelled' %}
                         <span class="badge bg-danger">{{ order.get_status_display }}</span>
+                    {% endif %}
+                </p>
+                <p><strong>Phương thức thanh toán:</strong><br>
+                    {% if order.payment_method == 'cod' %}
+                        <span class="badge bg-warning text-dark">
+                            <i class="bi bi-truck"></i> {{ order.get_payment_method_display }}
+                        </span>
+                    {% else %}
+                        <span class="badge bg-info">
+                            <i class="bi bi-bank"></i> {{ order.get_payment_method_display }}
+                        </span>
                     {% endif %}
                 </p>
                 <p><strong>Ngày đặt:</strong><br>{{ order.created_at|date:"d/m/Y H:i" }}</p>

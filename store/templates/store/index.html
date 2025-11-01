@@ -1,8 +1,18 @@
 {% extends 'store/base.html' %}
 {% load humanize %}
-{% block title %}Trang chủ - Cửa hàng sách{% endblock %}
+{% block title %}Trang chủ - Tiệm sách Urahara{% endblock %}
 
 {% block content %}
+<!-- Banner Noel -->
+<div class="christmas-banner">
+    {% load static %}
+    <img src="{% static 'store/img/banner_noel.png' %}" alt="Banner Noel" onerror="this.style.display='none'">
+    <div class="banner-text">
+        CHÀO MỪNG BẠN ĐẾN VỚI TIỆM SÁCH URAHARA 🎄
+    </div>
+    <div class="snow" id="snow"></div>
+</div>
+
 <div class="row">
     <!-- Sidebar Categories -->
     <div class="col-md-3 mb-4">
@@ -112,5 +122,10 @@
         {% endif %}
     </div>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+{% load static %}
+<script src="{% static 'store/js/snow.js' %}"></script>
 {% endblock %}
 

@@ -1,6 +1,7 @@
 {% extends 'store/base.html' %}
+{% load humanize %}
 
-{% block title %}Thanh toán - Cửa hàng sách{% endblock %}
+{% block title %}Thanh toán - Tiệm sách Urahara{% endblock %}
 
 {% block content %}
 <h2 class="mb-4"><i class="bi bi-credit-card"></i> Thanh toán</h2>
@@ -42,6 +43,18 @@
                             <div class="text-danger">{{ form.address.errors }}</div>
                         {% endif %}
                     </div>
+                    <div class="mb-3">
+                        <label for="{{ form.payment_method.id_for_label }}" class="form-label">{{ form.payment_method.label }}</label>
+                        {{ form.payment_method }}
+                        {% if form.payment_method.errors %}
+                            <div class="text-danger">{{ form.payment_method.errors }}</div>
+                        {% endif %}
+                        <small class="form-text text-muted">
+                            <i class="bi bi-info-circle"></i> 
+                            <strong>COD:</strong> Thanh toán khi nhận hàng | 
+                            <strong>Chuyển khoản:</strong> Thanh toán trước khi giao hàng
+                        </small>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg">
                         <i class="bi bi-check-circle"></i> Xác nhận đặt hàng
                     </button>
@@ -61,7 +74,7 @@
                         <li class="mb-2 pb-2 border-bottom">
                             <div class="d-flex justify-content-between">
                                 <span>{{ item.book.title }}</span>
-                                <span>{{ item.quantity }} x {{ item.book.price|floatformat:0 }} đ</span>
+                                <span>{{ item.quantity }} x {{ item.book.price|floatformat:0|intcomma }} đ</span>
                             </div>
                         </li>
                     {% endfor %}
@@ -69,7 +82,7 @@
                 <hr>
                 <div class="d-flex justify-content-between">
                     <strong>Tổng tiền:</strong>
-                    <strong class="text-danger fs-5">{{ total_price|floatformat:0 }} đ</strong>
+                    <strong class="text-danger fs-5">{{ total_price|floatformat:0|intcomma }} đ</strong>
                 </div>
             </div>
         </div>
