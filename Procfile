@@ -1,2 +1,1 @@
-web: gunicorn project_name.bookstore_dss.wsgi
-
+web: gunicorn bookstore.wsgi
