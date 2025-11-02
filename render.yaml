@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: bookstore-dss
+    name: cuahanguarahara
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn bookstore.wsgi
