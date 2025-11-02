@@ -3,11 +3,12 @@ services:
     name: bookstore-dss
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn bookstore_dss.wsgi
+    startCommand: gunicorn bookstore.wsgi
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: bookstore-db
           property: connectionString
+
 databases:
   - name: bookstore-db
