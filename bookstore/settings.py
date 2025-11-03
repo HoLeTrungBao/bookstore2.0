@@ -18,7 +18,7 @@ SECRET_KEY = 'django-insecure-bookstore-secret-key-change-in-production'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bookstore2-0.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['bookstore-1661.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
